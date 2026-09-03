@@ -4,8 +4,6 @@ Private. Made-to-order USB-C macropad. Developer-first command surface, QMK/Vial
 
 **First working build:** 6 MX keys (2×3) + one clickable aluminum EC11 knob. Hand-soldered. Seeed XIAO RP2040. PETG two-piece. No custom app until it enumerates on macOS, Windows, and Linux.
 
-This repo is empty of CAD/firmware until a cloud agent can land files (Cursor on-demand). Local CAD experiments (5+5 test plate) are *not* the product.
-
 ## Locked spec
 
 | | |
@@ -62,12 +60,17 @@ Helm's gap: cheap QMK MX + one knob + Linux that actually works.
 └── BOM.md
 ```
 
-## How to print
+## How to print (Ender V3, PETG)
 
-1. Slice `stl/helm_plate.stl` and `stl/helm_bottom.stl` in dark PETG.
-2. Orientation: print the plate with the switch-face up. Print the bottom with the outside face on the bed (the XIAO pocket will be on the top).
-3. Recommended settings: 0.2 mm layers, 4 walls, 25–30% infill, 45 mm/s outer walls, no supports for the plate.
-4. Press four M2 brass heat-set inserts into the bottom posts while the plastic is warm, then attach the plate with M2 screws from the top.
+Parts are ~75 × 65 mm. They fit a 220 bed with room to spare.
+
+1. Slice `stl/helm_plate.stl` and `stl/helm_bottom.stl`.
+2. Plate: switch-face up, no supports. Bottom: floor on the bed (XIAO pocket and bosses face up). No supports.
+3. 0.2 mm layers, 0.4 mm nozzle, 4 walls, 25–30% infill, ~240 °C PETG / 80 °C bed, 45 mm/s outer walls.
+4. Rebuild STLs after CAD edits: `openscad -o stl/helm_plate.stl cad/helm_plate.scad` and the same for `helm_bottom.scad`.
+5. Heat-set four M2 inserts in the bottom bosses, then screw the plate on from the top.
+
+Hold XIAO BOOT while plugging USB to flash. No underside button holes; they wouldn't reach the switches.
 
 ## How to flash
 

@@ -1,52 +1,73 @@
 include <helm_parameters.scad>
+$fn = 40;
 
-$fn = 64;
-
-module m2_insert_2d() {
-    circle(d = m2_insert);
+module wedge_solid(xy_inset) {
+    r = max(0.4, corner_r - xy_inset);
+    w = plate_width - 2 * xy_inset;
+    d = desk_depth - 2 * xy_inset;
+    hull() {
+        for (x = [r, w - r], y = [r, d - r]) {
+            translate([xy_inset + x, xy_inset + y, r])
+                sphere(r = r);
+            zt = z_top(xy_inset + y) - r;
+            translate([xy_inset + x, xy_inset + y, zt])
+                sphere(r = r);
+        }
+    }
 }
 
 module helm_bottom() {
     difference() {
         union() {
-            // outer shell
             difference() {
-                cube([plate_width, plate_depth, case_height]);
-                translate([wall, wall, case_floor])
-                    cube([plate_width - 2 * wall,
-                          plate_depth - 2 * wall,
-                          case_height - case_floor + 0.01]);
+                wedge_solid(0);
+                translate([0, 0, case_floor])
+                    wedge_solid(wall);
             }
 
-            // M2 heat-set insert bosses
-            for (p = screw_positions)
-                translate([p[0], p[1], 0])
-                    cylinder(h = case_height, d = 6);
+            // bosses stay inside the wedge
+            intersection() {
+                wedge_solid(0);
+                union() {
+                    for (p = screw_positions)
+                        plate_to_world()
+                            translate([p[0], p[1], -12])
+                                cylinder(h = 12, d = boss_d);
+                }
+            }
+
+            for (p = align_positions)
+                plate_to_world()
+                    translate([p[0], p[1], 0])
+                        cylinder(h = align_pin_h, d = align_pin_d);
         }
 
-        // insert holes
         for (p = screw_positions)
-            translate([p[0], p[1], -1])
-                linear_extrude(height = case_height + 2)
-                    m2_insert_2d();
+            plate_to_world()
+                translate([p[0], p[1], -m2_insert_h])
+                    cylinder(h = m2_insert_h + 0.3, d = m2_insert);
 
-        // XIAO RP2040 pocket (on the inside floor)
         translate([xiao_x, xiao_y, case_floor - xiao_pocket_depth])
-            cube([xiao_w, xiao_d, xiao_pocket_depth + 0.01]);
+            cube([xiao_w, xiao_d * cos(desk_angle), xiao_pocket_depth + 0.2]);
 
-        // USB-C slot through the rear wall
-        translate([xiao_x + xiao_w / 2 - usb_w / 2, -1, case_floor - xiao_pocket_depth])
+        translate([xiao_x + xiao_w / 2 - usb_w / 2, -1, usb_z])
             cube([usb_w, wall + 2, usb_h]);
 
-        // BOOT / RESET pin holes from the underside
-        for (p = xiao_button_holes)
-            translate([p[0], p[1], -1])
-                cylinder(h = case_floor + 2, d = 1.5);
+        translate([xiao_x + xiao_w / 2 - zip_w / 2, -1, usb_z + usb_h + 1.5])
+            cube([zip_w, wall + 2, zip_h]);
 
-        // encoder body clearance well
-        translate([encoder_x, encoder_y, -1])
-            cylinder(h = case_floor + 2, d = ec11_body + 2);
+        intersection() {
+            translate([0, 0, case_floor + 0.5])
+                cube([plate_width, desk_depth, rear_h]);
+            plate_to_world()
+                translate([encoder_x, encoder_y, -25])
+                    cylinder(h = 25, d = ec11_body + 1.5);
+        }
+
+        for (p = foot_positions)
+            translate([p[0], p[1], -0.01])
+                cylinder(h = foot_h + 0.01, d = foot_d);
     }
 }
 
-render() helm_bottom();
+helm_bottom();
