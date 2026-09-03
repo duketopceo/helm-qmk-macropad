@@ -51,7 +51,7 @@ Helm's gap: cheap QMK MX + one knob + Linux that actually works.
 │   └── helm_bottom.scad
 ├── stl/             # Generated plate and bottom STLs
 ├── firmware/qmk/keyboards/handwired/helm/
-│   ├── info.json
+│   ├── keyboard.json
 │   ├── rules.mk
 │   ├── config.h
 │   └── keymaps/vial/

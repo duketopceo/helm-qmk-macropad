@@ -1,5 +1,4 @@
 #pragma once
 
 #define VIAL_KEYBOARD_NAME "Helm"
-#define VIAL_UNLOCK_COMBO_ROWS {0, 0}
-#define VIAL_UNLOCK_COMBO_COLS {0, 0}
+#define VIAL_KEYBOARD_UID {0x3C, 0x11, 0x79, 0x71, 0xE2, 0xC9, 0xF9, 0xF3}
