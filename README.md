@@ -41,3 +41,45 @@ MX cutout 14.0 mm @ 19.05 mm pitch. EC11 bushing 7.2 mm. XIAO pocket 21.2×17.7�
 - OpenAI Codex Micro / Work Louder Creator Micro 2 — 13 keys + **one** reasoning dial, $230
 
 Helm's gap: cheap QMK MX + one knob + Linux that actually works.
+
+## Repo layout
+
+```
+├── cad/             # Parametric OpenSCAD source
+│   ├── helm_parameters.scad
+│   ├── helm_plate.scad
+│   └── helm_bottom.scad
+├── stl/             # Generated plate and bottom STLs
+├── firmware/qmk/keyboards/handwired/helm/
+│   ├── info.json
+│   ├── rules.mk
+│   ├── config.h
+│   └── keymaps/vial/
+│       ├── keymap.c
+│       ├── rules.mk
+│       └── vial.json
+├── WIRING.md
+└── BOM.md
+```
+
+## How to print
+
+1. Slice `stl/helm_plate.stl` and `stl/helm_bottom.stl` in dark PETG.
+2. Orientation: print the plate with the switch-face up. Print the bottom with the outside face on the bed (the XIAO pocket will be on the top).
+3. Recommended settings: 0.2 mm layers, 4 walls, 25–30% infill, 45 mm/s outer walls, no supports for the plate.
+4. Press four M2 brass heat-set inserts into the bottom posts while the plastic is warm, then attach the plate with M2 screws from the top.
+
+## How to flash
+
+1. Clone `qmk_firmware` (the Vial fork is `vial-kb/vial-qmk`) and set it up locally.
+2. Copy the `firmware/qmk/keyboards/handwired/helm/` directory into `qmk_firmware/keyboards/handwired/`.
+3. Build with `qmk compile -kb handwired/helm -km vial`.
+4. Hold the XIAO BOOT button while plugging in USB, or double-tap RESET, to get the `RPI-RP2` UF2 drive.
+5. Copy the generated `handwired_helm_vial.uf2` to the `RPI-RP2` drive. The XIAO will reboot and enumerate as a HID keyboard.
+
+## Verify HID
+
+- **macOS** — System Settings > Keyboard should list "Helm". The first key should emit `KC_MUTE`.
+- **Windows** — Device Manager should show a HID Keyboard and the QMK/Vial VID `0x484D` PID `0x0001`.
+- **Omarchy / Hyprland** — `lsusb` and `dmesg | tail` should show the new keyboard. Open a browser and go to `vial.rocks`; authorize the device, then press each of the 6 keys, the knob click, and turn the knob in each direction. All events should register in the Vial test tab.
+
