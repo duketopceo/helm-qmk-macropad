@@ -153,6 +153,18 @@ one encoder *before* printing anything.
 ## Identity constraints
 
 Made-to-order and private. `README.md` states the locked spec and the buy list;
-`BOM.md` is the parts list and `WIRING.md` the pinout. When changing any of
-them, keep the three consistent — a dimension change in the SCAD that is not
-reflected in `WIRING.md` or `BOM.md` produces a board that cannot be assembled.
+`BOM.md` is the parts list; `WIRING.md` is the pinout and assembly notes. These
+four documents overlap, but not uniformly — update the ones your change actually
+affects:
+
+| Change | Update |
+|---|---|
+| A part, quantity, or spec in `cad/helm_parameters.scad` | `BOM.md`, and `README.md` if it is in the locked-spec table |
+| A pin, matrix position, or encoder pin in `keyboard.json` | `WIRING.md` |
+| A documented fit constraint, e.g. `plate_thickness` or `mx_corner_r` | the document that states that constraint, plus the SCAD comment |
+| Assembly order or tooling | `WIRING.md` |
+
+A change that alters a part without a matching `BOM.md` entry produces a board
+that cannot be ordered, and a pin change without a `WIRING.md` update produces a
+board that cannot be assembled. Those two are the failures worth catching; a CAD
+change does not automatically require touching all three documents.
