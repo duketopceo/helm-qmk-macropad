@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Helm mark">
+  <rect x="5" y="6" width="10" height="10" rx="2" fill="#E6EDF2"/>
+  <rect x="18" y="6" width="10" height="10" rx="2" fill="#E6EDF2"/>
+  <rect x="31" y="6" width="10" height="10" rx="2" fill="#E6EDF2"/>
+  <rect x="5" y="19" width="10" height="10" rx="2" fill="#E6EDF2"/>
+  <rect x="18" y="19" width="10" height="10" rx="2" fill="#E6EDF2"/>
+  <rect x="31" y="19" width="10" height="10" rx="2" fill="#E6EDF2"/>
+  <circle cx="49" cy="24" r="6" fill="#FF8F6B"/>
+  <path d="M5 59 L58 59 L58 44.8 Z" fill="#E6EDF2"/>
+</svg>

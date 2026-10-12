@@ -1,6 +1,11 @@
-# Helm
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/wordmark-dark.svg">
+    <img alt="Helm" src="assets/brand/wordmark.svg" height="64">
+  </picture>
+</p>
 
-Private. Made-to-order USB-C macropad. Developer-first command surface, QMK/Vial second, real Linux (Omarchy/Hyprland) as the wedge Elgato and Logitech skip.
+Made-to-order USB-C macropad. Developer-first command surface, QMK/Vial second, real Linux (Omarchy/Hyprland) as the wedge Elgato and Logitech skip.
 
 **First working build:** 6 MX keys (2×3) + one clickable aluminum EC11 knob. Hand-soldered. Seeed XIAO RP2040. PETG two-piece, 15° desk wedge. No custom app until it enumerates as HID on macOS, Windows, and Linux.
 
@@ -90,3 +95,12 @@ Rebuild:
 - **macOS** — System Settings > Keyboard should list "Helm". The first key emits `KC_MUTE`.
 - **Windows** — HID Keyboard, VID `0x484D` PID `0x0001`.
 - **Omarchy / Hyprland** — `lsusb` / `dmesg`. Open `vial.rocks`, authorize, test all 6 keys, knob click, and both rotate directions.
+
+## Status and roadmap
+Firmware has not been build-verified in CI and the committed `.uf2` has no recorded source commit. Layers 1-3 in the shipped keymap have no layer-switch key. See [ROADMAP.md](ROADMAP.md), [DESIGN.md](DESIGN.md) and [docs/research/](docs/research/2026-10-10-landscape.md). The logo in `assets/brand/` is a proposal pending owner sign-off.
+
+## Contributing
+Issues and PRs welcome. The spec table above is locked; process and documentation changes are the open work.
+
+## Licence
+MIT, see [LICENSE](LICENSE). QMK-derived firmware files carry QMK's GPL terms.
