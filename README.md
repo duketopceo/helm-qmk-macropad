@@ -90,3 +90,7 @@ Rebuild:
 - **macOS** — System Settings > Keyboard should list "Helm". The first key emits `KC_MUTE`.
 - **Windows** — HID Keyboard, VID `0x484D` PID `0x0001`.
 - **Omarchy / Hyprland** — `lsusb` / `dmesg`. Open `vial.rocks`, authorize, test all 6 keys, knob click, and both rotate directions.
+
+## 2026-11-08 audit update
+
+Prototype-to-pilot evidence pass. Authoritative docs now live under `docs/` (spec, procurement, assembly, QC, validation status, cost model, roadmap) with `hardware/bom.csv` as the single BOM and blank templates under `production/`. Nothing physical was tested in this pass; OpenSCAD and the QMK toolchain were not installed on the audit machine, so no STL or firmware regeneration was attempted. Committed STL/UF2 files are untouched. Start at `docs/VALIDATION_STATUS.md` for what is verified, assumed, or blocked.

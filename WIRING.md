@@ -38,3 +38,7 @@ Same as key 1: one terminal to D1 / D2 / D3 / D4 / D5, other to the GND rail. Ti
 - Expect underside BOOT holes. Hold **BOOT while plugging in**.
 
 Keep D+/D- pads clear. Trim EC11 legs after soldering so the body clears the shelf.
+
+## Audit note 2026-11-08
+
+Pin table above cross-checked against `firmware/qmk/keyboards/handwired/helm/keyboard.json` and the XIAO RP2040 D0-D10->GPIO mapping (TinyGo reference). Keys are direct-pin to GND; encoder push shares the matrix at [1,3]. No wiring change in this update; all physical validation is still owner-side (see `docs/VALIDATION_STATUS.md`).

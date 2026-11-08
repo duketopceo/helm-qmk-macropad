@@ -22,3 +22,11 @@
 - Spare M2 inserts in case one spins
 
 Do not substitute a snap-in-only encoder or a uniform plate thicker than 1.6 mm.
+
+## Update 2026-11-08 (audit)
+
+Authoritative machine-readable BOM: `hardware/bom.csv`. This file is a readable summary only; if they conflict, `hardware/bom.csv` wins.
+
+- XIAO RP2040 (Seeed part 102010428): $3.99 at Seeed, accessed 2026-11-08 (VERIFIED_SOURCE). One consumed per unit, one development spare.
+- Encoder Adafruit 377: candidate only, out of stock at Adafruit 2026-11-08; mechanical fit not verified; treat as BLOCKED until a threaded variant with a datasheet drawing is locked.
+- Insert OD conflict: BOM above says ~3.5 mm OD; CAD hole (`m2_insert`) is 3.2 mm. Do not install a 3.5 mm insert in the 3.2 mm feature until the selected insert's install guidance + coupon test are recorded.
